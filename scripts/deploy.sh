@@ -21,6 +21,9 @@ git clone https://github.com/josejuansanchez/iaw-practica-lamp /tmp/iaw-practica
 # Movemos el codigo fuente de la aplicaciona /var/www/html
 mv /tmp/iaw-practica-lamp/src/* /var/www/html
 
+# Configuramos el archivo sql para que no de error al poner una base de datos distinata a lamp_db
+sed -i "s/lamp_db/$DB_NAME/g" /tmp/iaw-practica-lamp/db/database.sql
+
 # configuramos el archivo config.php de la aplicación
 sed -i "s/database_name_here/$DB_NAME/" /var/www/html/config.php
 sed -i "s/username_here/$DB_USER/" /var/www/html/config.php
