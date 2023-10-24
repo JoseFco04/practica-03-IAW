@@ -15,36 +15,64 @@
 ### El script del lamp es este paso por paso :
 
 #### Muestra todos los comandos que se van ejecutando
+~~~
 set -x
-
+~~~
 #### Actualizamos los repositorios
-#### apt update
-
+~~~
+apt update
+~~~
 #### Actualizamos los paquetes
-
+~~~
 #### apt upgrade -y
-
+~~~
 #### instalamos el servidor web Apache
+~~~
 apt install apache2 -y
-
+~~~
 #### Instalamos e sistema gestor de base de datos de mysql
+~~~
 apt install mysql-server -y
-
+~~~
 #### mysql -u $DB_USER -p $DP_PASSWD < .../sql/database.sql
 
 #### Instalamos  PHP
+~~~
 apt install php libapache2-mod-php php-mysql -y
-
+~~~
 #### Copiar el archivo de configuración de Apache 
+~~~
 cp ../conf/000-default.conf /etc/apache2/sites-available
+~~~
 #### Reiniciamos el servicio Apache
+~~~
 systemctl restart apache2
-
+~~~
 #### Copiamos el archivo de prueba de php
+~~~
 cp ../php/index.php /var/www/html
-
+~~~
 #### Modificamos el propietario y el grupo del directorio /var/www/html
-
+~~~
 chown -R www-data:www-data /var/www/html
-
+~~~
 ### El archivo de cofiguracion 000-default-conf es este:
+~~~
+ServerSignature Off
+ServerTokens Prod
+
+<VirtualHost *:80>
+#ServerName www.example.com
+DocumentRoot /var/www/html
+
+  DirectoryIndex index.php index.html
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+~~~
+
+### El archivo de php
+~~~
+
+~~~
