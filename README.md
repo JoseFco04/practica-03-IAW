@@ -71,8 +71,12 @@ DocumentRoot /var/www/html
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ~~~
-
 ### El archivo de php
 ~~~
+<?php
 
+phpinfo();
+
+?>
 ~~~
+### Después tenemos nuestro archivo .env para guardar nuestras variables
