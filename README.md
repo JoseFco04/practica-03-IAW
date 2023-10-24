@@ -87,4 +87,6 @@ DB_NAME=aplicacion
 DB_USER=usuario
 DB_PASSWORD=password
 ~~~
-### Y el ultimo es el script del deploy.sh,
+### Y el ultimo es el script del deploy.sh que paso por paso hace esto:
+
+
