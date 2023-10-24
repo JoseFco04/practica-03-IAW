@@ -89,4 +89,61 @@ DB_PASSWORD=password
 ~~~
 ### Y el ultimo es el script del deploy.sh que paso por paso hace esto:
 
+#### Muestra todos los comandos que se van ejecutando  
+~~~
+set -x
+~~~
+#### Importamos las variables 
+~~~
+source .env 
+~~~
+#### Actualizamos los repositorios 
+~~~
+apt  update 
+~~~
+#### Actualizamos todos los paquetes 
+~~~
+#apt upgrade -y 
+~~~
+#### Eliminamos descargas previas del repositorio 
+~~~
+rm -rf /tmp/iaw-practica-lamp
+~~~
+#### Clonamos el repositorio con el codigo fuente de la aplicacion
+~~~
+git clone https://github.com/josejuansanchez/iaw-practica-lamp /tmp/iaw-practica-lamp
+~~~
+#### Movemos el codigo fuente de la aplicaciona /var/www/html
+~~~
+mv /tmp/iaw-practica-lamp/src/* /var/www/html
+~~~
+#### Configuramos el archivo sql para que no de error al poner una base de datos distinata a lamp_db
+~~~
+sed -i "s/lamp_db/$DB_NAME/g" /tmp/iaw-practica-lamp/db/database.sql
+~~~
+#### configuramos el archivo config.php de la aplicación
+~~~
+sed -i "s/database_name_here/$DB_NAME/" /var/www/html/config.php
+sed -i "s/username_here/$DB_USER/" /var/www/html/config.php
+sed -i "s/password_here/$DB_PASSWORD/" /var/www/html/config.php
+~~~
+#### Importamos el script de base de datos 
+~~~
+mysql -u root < /tmp/iaw-practica-lamp/db/database.sql
+~~~
+#### Creamos el usuariob de la base de datos y le asignamos privilegios
+~~~
+mysql -u root <<< "DROP USER IF EXISTS $DB_USER@'%'"
+mysql -u root <<< "CREATE USER $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD'"
+mysql -u root <<< "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%'"
+~~~
+#### Y al ejecutar el script y menternos en el navegador en la ip elástica nos saldría la aplicación en la que podemos meter las bases de datos que queramos.
+#### Así se vería la página web
+![cap p32](https://github.com/JoseFco04/practica-03-IAW/assets/145347148/a3729289-5188-4a4b-847c-5becd1898216)
+#### Añadimos una base de datos 
+![cap p322](https://github.com/JoseFco04/practica-03-IAW/assets/145347148/c7f97637-8cff-44a6-bb25-eac944111c35)
+#### Y nos saldría en la página.
+![cap p323](https://github.com/JoseFco04/practica-03-IAW/assets/145347148/2fcfd9c3-e57e-4477-9007-35397fa07416)
+
+
 
