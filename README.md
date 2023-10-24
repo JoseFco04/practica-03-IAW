@@ -1,4 +1,4 @@
-# practica-03-IAW
+# Practica-03-IAW
 ### Para esta práctica vamos a crear una instancia de ubuntu, pulsamos en lanzar instancia y seleccionamos ubuntu 
 ![cap 1 p3](https://github.com/JoseFco04/practica-03-IAW/assets/145347148/37b6124d-4994-4a13-b8d9-1ba57372f835)
 
@@ -121,7 +121,7 @@ mv /tmp/iaw-practica-lamp/src/* /var/www/html
 ~~~
 sed -i "s/lamp_db/$DB_NAME/g" /tmp/iaw-practica-lamp/db/database.sql
 ~~~
-#### configuramos el archivo config.php de la aplicación
+#### Configuramos el archivo config.php de la aplicación
 ~~~
 sed -i "s/database_name_here/$DB_NAME/" /var/www/html/config.php
 sed -i "s/username_here/$DB_USER/" /var/www/html/config.php
