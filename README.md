@@ -80,3 +80,11 @@ phpinfo();
 ?>
 ~~~
 ### Después tenemos nuestro archivo .env para guardar nuestras variables
+~~~
+# Configuramos las variables
+#-------------------------------------------
+DB_NAME=aplicacion
+DB_USER=usuario
+DB_PASSWORD=password
+~~~
+### Y el ultimo es el script del deploy.sh,
